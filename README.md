@@ -1,50 +1,99 @@
-# React + TypeScript + Vite
+# Traductor Mapudungun - Español
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+Este proyecto es una aplicación web que proporciona servicios de traducción entre Mapudungun y Español, incluyendo reconocimiento de voz (STT), traducción de texto y síntesis de voz (TTS).
 
-Currently, two official plugins are available:
+## Características
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react/README.md) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+- Interfaz de usuario intuitiva y responsiva
+- Modo oscuro/claro
+- Reconocimiento de voz (STT)
+- Traducción de texto
+- Síntesis de voz (TTS)
 
-## Expanding the ESLint configuration
+## Tecnologías Utilizadas
 
-If you are developing a production application, we recommend updating the configuration to enable type aware lint rules:
+- React
+- TypeScript
+- Vite
+- Tailwind CSS
+- Axios para peticiones HTTP
 
-- Configure the top-level `parserOptions` property like this:
+## Cómo clonar el repositorio
 
-```js
-export default tseslint.config({
-  languageOptions: {
-    // other options...
-    parserOptions: {
-      project: ['./tsconfig.node.json', './tsconfig.app.json'],
-      tsconfigRootDir: import.meta.dirname,
-    },
-  },
-})
+Para clonar este repositorio, sigue estos pasos:
+
+1. Abre tu terminal.
+2. Navega al directorio donde quieres clonar el proyecto.
+3. Ejecuta el siguiente comando:
+
+```bash
+git clone https://github.com/tu-usuario/traductor-mapudungun-espanol.git
 ```
 
-- Replace `tseslint.configs.recommended` to `tseslint.configs.recommendedTypeChecked` or `tseslint.configs.strictTypeChecked`
-- Optionally add `...tseslint.configs.stylisticTypeChecked`
-- Install [eslint-plugin-react](https://github.com/jsx-eslint/eslint-plugin-react) and update the config:
+4. Navega al directorio del proyecto:
 
-```js
-// eslint.config.js
-import react from 'eslint-plugin-react'
-
-export default tseslint.config({
-  // Set the react version
-  settings: { react: { version: '18.3' } },
-  plugins: {
-    // Add the react plugin
-    react,
-  },
-  rules: {
-    // other rules...
-    // Enable its recommended rules
-    ...react.configs.recommended.rules,
-    ...react.configs['jsx-runtime'].rules,
-  },
-})
+```bash
+cd traductor-mapudungun-espanol
 ```
+
+## Instalación
+
+Después de clonar el repositorio, sigue estos pasos para instalar las dependencias y ejecutar el proyecto:
+
+1. Instala las dependencias:
+
+```bash
+npm install
+```
+
+2. Inicia el servidor de desarrollo:
+
+```bash
+npm run dev
+```
+
+El proyecto debería estar ahora corriendo en `http://localhost:5173` (o el puerto que Vite asigne).
+
+## Estructura del Proyecto
+
+El proyecto está organizado en los siguientes componentes principales:
+
+- `App.tsx`: Componente principal que renderiza la aplicación.
+- `TranslatorApp.tsx`: Maneja la lógica general y el estado de la aplicación.
+- `STTComponent.tsx`: Componente para el reconocimiento de voz.
+- `TraductorComponent.tsx`: Componente para la traducción de texto.
+- `TTSComponent.tsx`: Componente para la síntesis de voz.
+
+## Endpoints de los Microservicios
+
+La aplicación interactúa con los siguientes microservicios:
+
+1. Servicio STT (Speech-to-Text):
+   - Endpoint: `http://localhost:8000/stt`
+   - Método: POST
+   - Cuerpo: archivo de audio
+   - Respuesta: texto transcrito
+
+2. Servicio de Traducción:
+   - Endpoint: `http://localhost:8000/translate`
+   - Método: POST
+   - Cuerpo: `{ "text": "texto a traducir", "source_lang": "es", "target_lang": "arn" }`
+   - Respuesta: `{ "translated_text": "texto traducido" }`
+
+3. Servicio TTS (Text-to-Speech):
+   - Endpoint: `http://localhost:8000/tts`
+   - Método: POST
+   - Cuerpo: `{ "text": "texto a convertir en voz" }`
+   - Respuesta: archivo de audio
+
+Nota: Asegúrate de que estos microservicios estén en funcionamiento y sean accesibles desde la aplicación frontend.
+
+
+
+## Contribución
+
+Las contribuciones son bienvenidas. Por favor, abre un issue para discutir cambios mayores antes de crear un pull request.
+
+## Licencia
+
+[MIT](https://choosealicense.com/licenses/mit/)
